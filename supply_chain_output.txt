@@ -1,0 +1,4420 @@
+
+============================================================
+SECTION 1 : CREATE TABLES
+============================================================
+
+
+Error starting at line : 28 in command -
+CREATE TABLE product (
+    product_id   NUMBER PRIMARY KEY,
+    product_name VARCHAR2(100),
+    description  VARCHAR2(255),
+    price        NUMBER
+)
+Error report -
+ORA-00955: name is already used by an existing object
+
+https://docs.oracle.com/error-help/db/ora-00955/00955. 00000 -  "name is already used by an existing object"
+*Cause:    An attempt was made to create a database object (such
+           as a table, view, cluster, index, or synonym) that already
+           existed. A user's database objects must have distinct names.
+*Action:   Enter a unique name for the database object or modify
+           or drop the existing object so it can be reused.
+>> Table PRODUCT created.
+
+Error starting at line : 36 in command -
+CREATE TABLE warehouse (
+    warehouse_id NUMBER PRIMARY KEY,
+    location     VARCHAR2(100) NOT NULL,
+    capacity     NUMBER
+)
+Error report -
+ORA-00955: name is already used by an existing object
+
+https://docs.oracle.com/error-help/db/ora-00955/00955. 00000 -  "name is already used by an existing object"
+*Cause:    An attempt was made to create a database object (such
+           as a table, view, cluster, index, or synonym) that already
+           existed. A user's database objects must have distinct names.
+*Action:   Enter a unique name for the database object or modify
+           or drop the existing object so it can be reused.
+>> Table WAREHOUSE created.
+
+Error starting at line : 43 in command -
+CREATE TABLE inventory (
+    inventory_id NUMBER PRIMARY KEY,
+    product_id   NUMBER,
+    warehouse_id NUMBER,
+    quantity     NUMBER,
+    CONSTRAINT fk_inv_product   FOREIGN KEY (product_id)   REFERENCES product(product_id),
+    CONSTRAINT fk_inv_warehouse FOREIGN KEY (warehouse_id) REFERENCES warehouse(warehouse_id)
+)
+Error report -
+ORA-00955: name is already used by an existing object
+
+https://docs.oracle.com/error-help/db/ora-00955/00955. 00000 -  "name is already used by an existing object"
+*Cause:    An attempt was made to create a database object (such
+           as a table, view, cluster, index, or synonym) that already
+           existed. A user's database objects must have distinct names.
+*Action:   Enter a unique name for the database object or modify
+           or drop the existing object so it can be reused.
+>> Table INVENTORY created.
+
+Error starting at line : 53 in command -
+CREATE TABLE client (
+    client_id NUMBER PRIMARY KEY,
+    name      VARCHAR2(50),
+    address   VARCHAR2(100)
+)
+Error report -
+ORA-00955: name is already used by an existing object
+
+https://docs.oracle.com/error-help/db/ora-00955/00955. 00000 -  "name is already used by an existing object"
+*Cause:    An attempt was made to create a database object (such
+           as a table, view, cluster, index, or synonym) that already
+           existed. A user's database objects must have distinct names.
+*Action:   Enter a unique name for the database object or modify
+           or drop the existing object so it can be reused.
+>> Table CLIENT created.
+
+Error starting at line : 60 in command -
+CREATE TABLE orders (
+    order_id   NUMBER PRIMARY KEY,
+    client_id  NUMBER,
+    order_date DATE,
+    status     VARCHAR2(20),
+    FOREIGN KEY (client_id) REFERENCES client(client_id)
+)
+Error report -
+ORA-00955: name is already used by an existing object
+
+https://docs.oracle.com/error-help/db/ora-00955/00955. 00000 -  "name is already used by an existing object"
+*Cause:    An attempt was made to create a database object (such
+           as a table, view, cluster, index, or synonym) that already
+           existed. A user's database objects must have distinct names.
+*Action:   Enter a unique name for the database object or modify
+           or drop the existing object so it can be reused.
+>> Table ORDERS created.
+
+Error starting at line : 69 in command -
+CREATE TABLE vehicle (
+    vehicle_id   NUMBER PRIMARY KEY,
+    vehicle_type VARCHAR2(40),
+    capacity     NUMBER
+)
+Error report -
+ORA-00955: name is already used by an existing object
+
+https://docs.oracle.com/error-help/db/ora-00955/00955. 00000 -  "name is already used by an existing object"
+*Cause:    An attempt was made to create a database object (such
+           as a table, view, cluster, index, or synonym) that already
+           existed. A user's database objects must have distinct names.
+*Action:   Enter a unique name for the database object or modify
+           or drop the existing object so it can be reused.
+>> Table VEHICLE created.
+
+Error starting at line : 76 in command -
+CREATE TABLE driver (
+    driver_id  NUMBER PRIMARY KEY,
+    name       VARCHAR2(50),
+    license_no VARCHAR2(20) UNIQUE
+)
+Error report -
+ORA-00955: name is already used by an existing object
+
+https://docs.oracle.com/error-help/db/ora-00955/00955. 00000 -  "name is already used by an existing object"
+*Cause:    An attempt was made to create a database object (such
+           as a table, view, cluster, index, or synonym) that already
+           existed. A user's database objects must have distinct names.
+*Action:   Enter a unique name for the database object or modify
+           or drop the existing object so it can be reused.
+>> Table DRIVER created.
+
+Error starting at line : 83 in command -
+CREATE TABLE shipment (
+    shipment_id NUMBER PRIMARY KEY,
+    order_id    NUMBER,
+    vehicle_id  NUMBER,
+    driver_id   NUMBER,
+    status      VARCHAR2(20),
+    FOREIGN KEY (order_id)   REFERENCES orders(order_id),
+    FOREIGN KEY (vehicle_id) REFERENCES vehicle(vehicle_id),
+    FOREIGN KEY (driver_id)  REFERENCES driver(driver_id)
+)
+Error report -
+ORA-00955: name is already used by an existing object
+
+https://docs.oracle.com/error-help/db/ora-00955/00955. 00000 -  "name is already used by an existing object"
+*Cause:    An attempt was made to create a database object (such
+           as a table, view, cluster, index, or synonym) that already
+           existed. A user's database objects must have distinct names.
+*Action:   Enter a unique name for the database object or modify
+           or drop the existing object so it can be reused.
+>> Table SHIPMENT created.
+
+============================================================
+SECTION 2 : INSERT DATA
+============================================================
+
+>> Inserting products...
+
+Error starting at line : 106 in command -
+INSERT INTO product VALUES (1,  'Yoga Mat Carrier',                  'A durable strap designed to carry and store yoga mats easily.',           599)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 107 in command -
+INSERT INTO product VALUES (2,  'Car Phone Mount',                   'An adjustable holder to mount a smartphone on a car dashboard.',          799)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 108 in command -
+INSERT INTO product VALUES (3,  'Watercolor Set',                    'A painting kit containing watercolor paints and brushes.',                 450)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 109 in command -
+INSERT INTO product VALUES (4,  'Lemon Herb Quinoa',                 'A healthy quinoa dish flavored with lemon and herbs.',                     320)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 110 in command -
+INSERT INTO product VALUES (5,  'Frozen Salmon Filets',              'Fresh salmon fish fillets packed and stored in frozen condition.',          850)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 111 in command -
+INSERT INTO product VALUES (6,  'Puzzle Mat',                        'Soft foam mat pieces used as a base for assembling puzzles.',              699)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 112 in command -
+INSERT INTO product VALUES (7,  'Smartphone Stand',                  'A stand to hold smartphones upright for watching videos or calls.',        349)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 113 in command -
+INSERT INTO product VALUES (8,  'Lentil Soup (canned)',              'Ready-to-eat lentil soup stored in a sealed can.',                         120)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 114 in command -
+INSERT INTO product VALUES (9,  'Water-Resistant Bluetooth Speaker', 'Portable speaker that connects via Bluetooth and resists water.',         2499)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 115 in command -
+INSERT INTO product VALUES (10, 'Beet Salad',                        'Prepared salad made with fresh beetroot and vegetables.',                  180)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 116 in command -
+INSERT INTO product VALUES (11, 'Flavored Rice Cakes',               'Light snack made from puffed rice with added flavors.',                     99)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 117 in command -
+INSERT INTO product VALUES (12, 'Wireless Charging Station',         'Charging pad that powers compatible devices without cables.',             1499)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 118 in command -
+INSERT INTO product VALUES (13, 'Hummus Variety Pack',               'A set of hummus dips available in multiple flavors.',                      350)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 119 in command -
+INSERT INTO product VALUES (14, 'Pressure Cooker',                   'Kitchen appliance used to cook food quickly using high pressure.',        2199)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 120 in command -
+INSERT INTO product VALUES (15, 'Personal Blender',                  'Compact blender designed for making smoothies and juices.',               1299)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 121 in command -
+INSERT INTO product VALUES (16, 'Lightweight Travel Backpack',       'Comfortable backpack designed for travel and daily use.',                 1799)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 122 in command -
+INSERT INTO product VALUES (17, 'Sparkling Blood Orange Soda',       'Carbonated soft drink flavored with blood orange.',                         60)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 123 in command -
+INSERT INTO product VALUES (18, 'Maple Pecan Pancake Mix',           'Ready-to-use pancake mix flavored with maple syrup and pecans.',           299)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 124 in command -
+INSERT INTO product VALUES (19, 'Basil-infused Olive Oil',           'Olive oil blended with basil for enhanced flavor in cooking.',             499)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 125 in command -
+INSERT INTO product VALUES (20, 'Adjustable Resistance Bands',       'Elastic fitness bands used for strength and workout exercises.',           749)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 126 in command -
+INSERT INTO product VALUES (21, 'Organic Brown Sugar',               'Natural brown sugar produced from organic sugarcane.',                     149)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 127 in command -
+INSERT INTO product VALUES (22, 'Bamboo Cutting Board',              'Eco-friendly cutting board made from durable bamboo.',                     549)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 128 in command -
+INSERT INTO product VALUES (23, 'Handheld Vacuum',                   'Portable vacuum cleaner used for quick cleaning tasks.',                  1999)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 129 in command -
+INSERT INTO product VALUES (24, 'Chipotle Black Bean Salad',         'Spicy salad made with black beans and chipotle seasoning.',                220)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 130 in command -
+INSERT INTO product VALUES (25, 'Classic Caesar Salad Kit',          'Ready-to-prepare Caesar salad with dressing and toppings.',                280)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 131 in command -
+INSERT INTO product VALUES (26, 'Honey Glazed Carrots',              'Cooked carrots coated with sweet honey glaze.',                            160)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 132 in command -
+INSERT INTO product VALUES (27, 'Honey Wheat Pretzels',              'Crunchy pretzels made with wheat and honey flavor.',                       130)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 133 in command -
+INSERT INTO product VALUES (28, 'Fresh Basil',                       'Fresh basil leaves used as a cooking herb.',                                50)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 134 in command -
+INSERT INTO product VALUES (29, 'Honey Roasted Almonds',             'Almond nuts roasted with honey for a sweet flavor.',                       299)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 135 in command -
+INSERT INTO product VALUES (30, 'Cheesy Cauliflower Bake',           'Baked cauliflower dish topped with melted cheese.',                        250)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 136 in command -
+INSERT INTO product VALUES (31, 'Lentil Soup',                       'Warm soup prepared with lentils and spices.',                              110)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 137 in command -
+INSERT INTO product VALUES (32, 'Wall Art',                          'Decorative artwork used for home or office walls.',                         999)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 138 in command -
+INSERT INTO product VALUES (33, 'Fitness Jump Rope',                 'Exercise rope used for cardio and fitness training.',                       399)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 139 in command -
+INSERT INTO product VALUES (34, 'Pineapple Chunks (canned)',         'Sweet pineapple pieces preserved in a can.',                                90)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 140 in command -
+INSERT INTO product VALUES (35, 'Thai Coconut Curry Sauce',          'Flavorful sauce made with coconut milk and Thai spices.',                  349)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 141 in command -
+INSERT INTO product VALUES (36, 'Magnetic Screen Door',              'Door screen with magnetic closure to keep insects out.',                   899)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 142 in command -
+INSERT INTO product VALUES (37, 'Luxury Bath Robe',                  'Soft and comfortable robe used after bathing.',                           1599)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 143 in command -
+INSERT INTO product VALUES (38, 'Almond Flour Bread Mix',            'Baking mix made with almond flour for making bread.',                      399)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 144 in command -
+INSERT INTO product VALUES (39, 'Faux Fur Coat',                     'Fashionable coat made from synthetic fur material.',                      3499)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 145 in command -
+INSERT INTO product VALUES (40, 'Training Soccer Ball',              'Durable football used for soccer practice and training.',                   649)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 146 in command -
+INSERT INTO product VALUES (41, 'Motorcycle Phone Mount',            'Phone holder designed for mounting on motorcycles.',                        699)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 147 in command -
+INSERT INTO product VALUES (42, 'Maple Syrup',                       'Natural sweet syrup commonly used with pancakes.',                          450)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 148 in command -
+INSERT INTO product VALUES (43, 'Stainless Steel Cutlery Set',       'Dining utensil set made of durable stainless steel.',                      999)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 149 in command -
+INSERT INTO product VALUES (44, 'LED Table Lamp',                    'Energy-efficient lamp used for lighting desks or tables.',                1199)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 150 in command -
+INSERT INTO product VALUES (45, 'Oven Thermometer',                  'Device used to measure the temperature inside an oven.',                   399)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 151 in command -
+INSERT INTO product VALUES (46, 'Baked Potato Chips',                'Crispy potato snack that is baked instead of fried.',                       80)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 152 in command -
+INSERT INTO product VALUES (47, 'Tahini',                            'Creamy paste made from ground sesame seeds.',                              299)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 153 in command -
+INSERT INTO product VALUES (48, 'Action Camera',                     'Compact camera for recording sports and outdoor activities.',             7999)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 154 in command -
+INSERT INTO product VALUES (49, 'Cotton Pajama Set',                 'Comfortable sleepwear made from soft cotton fabric.',                       849)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 155 in command -
+INSERT INTO product VALUES (50, 'Ginger Snaps',                      'Crispy cookies flavored with ginger.',                                     120)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008220) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+>> Inserting warehouses...
+
+Error starting at line : 158 in command -
+INSERT INTO warehouse VALUES (1, 'Chennai',   1000)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008222) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 159 in command -
+INSERT INTO warehouse VALUES (2, 'Bangalore',  800)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008222) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 160 in command -
+INSERT INTO warehouse VALUES (3, 'Hyderabad',  900)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008222) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 161 in command -
+INSERT INTO warehouse VALUES (4, 'Mumbai',    1200)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008222) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 162 in command -
+INSERT INTO warehouse VALUES (5, 'Delhi',     1100)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008222) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+>> Inserting inventory records...
+
+Error starting at line : 165 in command -
+INSERT INTO inventory VALUES (1, 38, 2, 99)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 166 in command -
+INSERT INTO inventory VALUES (2, 9, 1, 50)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 167 in command -
+INSERT INTO inventory VALUES (3, 21, 4, 68)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 168 in command -
+INSERT INTO inventory VALUES (4, 34, 2, 9)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 169 in command -
+INSERT INTO inventory VALUES (5, 15, 2, 14)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 170 in command -
+INSERT INTO inventory VALUES (6, 31, 5, 29)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 171 in command -
+INSERT INTO inventory VALUES (7, 18, 1, 72)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 172 in command -
+INSERT INTO inventory VALUES (8, 42, 3, 28)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 173 in command -
+INSERT INTO inventory VALUES (9, 5, 5, 45)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 174 in command -
+INSERT INTO inventory VALUES (10, 14, 2, 58)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 175 in command -
+INSERT INTO inventory VALUES (11, 47, 5, 5)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 176 in command -
+INSERT INTO inventory VALUES (12, 46, 2, 100)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 177 in command -
+INSERT INTO inventory VALUES (13, 45, 5, 73)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 178 in command -
+INSERT INTO inventory VALUES (14, 43, 5, 83)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 179 in command -
+INSERT INTO inventory VALUES (15, 47, 1, 86)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 180 in command -
+INSERT INTO inventory VALUES (16, 44, 4, 14)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 181 in command -
+INSERT INTO inventory VALUES (17, 47, 4, 59)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 182 in command -
+INSERT INTO inventory VALUES (18, 1, 2, 80)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 183 in command -
+INSERT INTO inventory VALUES (19, 44, 3, 27)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 184 in command -
+INSERT INTO inventory VALUES (20, 25, 3, 67)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 185 in command -
+INSERT INTO inventory VALUES (21, 22, 2, 17)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 186 in command -
+INSERT INTO inventory VALUES (22, 43, 1, 100)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 187 in command -
+INSERT INTO inventory VALUES (23, 46, 5, 80)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 188 in command -
+INSERT INTO inventory VALUES (24, 38, 3, 28)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 189 in command -
+INSERT INTO inventory VALUES (25, 30, 4, 16)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 190 in command -
+INSERT INTO inventory VALUES (26, 5, 5, 50)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 191 in command -
+INSERT INTO inventory VALUES (27, 21, 1, 60)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 192 in command -
+INSERT INTO inventory VALUES (28, 43, 1, 56)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 193 in command -
+INSERT INTO inventory VALUES (29, 6, 1, 68)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 194 in command -
+INSERT INTO inventory VALUES (30, 38, 1, 99)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 195 in command -
+INSERT INTO inventory VALUES (31, 23, 1, 86)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 196 in command -
+INSERT INTO inventory VALUES (32, 23, 2, 38)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 197 in command -
+INSERT INTO inventory VALUES (33, 11, 1, 74)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 198 in command -
+INSERT INTO inventory VALUES (34, 29, 5, 12)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 199 in command -
+INSERT INTO inventory VALUES (35, 9, 3, 70)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 200 in command -
+INSERT INTO inventory VALUES (36, 21, 2, 94)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 201 in command -
+INSERT INTO inventory VALUES (37, 44, 1, 2)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 202 in command -
+INSERT INTO inventory VALUES (38, 34, 3, 41)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 203 in command -
+INSERT INTO inventory VALUES (39, 11, 5, 64)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 204 in command -
+INSERT INTO inventory VALUES (40, 20, 3, 46)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 205 in command -
+INSERT INTO inventory VALUES (41, 38, 1, 5)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 206 in command -
+INSERT INTO inventory VALUES (42, 33, 5, 25)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 207 in command -
+INSERT INTO inventory VALUES (43, 28, 3, 73)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 208 in command -
+INSERT INTO inventory VALUES (44, 38, 3, 9)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 209 in command -
+INSERT INTO inventory VALUES (45, 42, 1, 24)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 210 in command -
+INSERT INTO inventory VALUES (46, 3, 4, 48)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 211 in command -
+INSERT INTO inventory VALUES (47, 32, 1, 83)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 212 in command -
+INSERT INTO inventory VALUES (48, 3, 1, 37)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 213 in command -
+INSERT INTO inventory VALUES (49, 4, 3, 48)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 214 in command -
+INSERT INTO inventory VALUES (50, 15, 2, 93)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 215 in command -
+INSERT INTO inventory VALUES (51, 36, 2, 45)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 216 in command -
+INSERT INTO inventory VALUES (52, 26, 1, 88)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 217 in command -
+INSERT INTO inventory VALUES (53, 24, 5, 42)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 218 in command -
+INSERT INTO inventory VALUES (54, 4, 3, 56)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 219 in command -
+INSERT INTO inventory VALUES (55, 21, 2, 50)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 220 in command -
+INSERT INTO inventory VALUES (56, 44, 2, 33)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 221 in command -
+INSERT INTO inventory VALUES (57, 16, 4, 76)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 222 in command -
+INSERT INTO inventory VALUES (58, 16, 1, 8)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 223 in command -
+INSERT INTO inventory VALUES (59, 9, 2, 65)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 224 in command -
+INSERT INTO inventory VALUES (60, 5, 2, 72)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 225 in command -
+INSERT INTO inventory VALUES (61, 19, 4, 63)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 226 in command -
+INSERT INTO inventory VALUES (62, 25, 5, 40)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 227 in command -
+INSERT INTO inventory VALUES (63, 22, 2, 19)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 228 in command -
+INSERT INTO inventory VALUES (64, 6, 1, 100)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 229 in command -
+INSERT INTO inventory VALUES (65, 24, 3, 49)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 230 in command -
+INSERT INTO inventory VALUES (66, 1, 5, 34)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 231 in command -
+INSERT INTO inventory VALUES (67, 48, 3, 63)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 232 in command -
+INSERT INTO inventory VALUES (68, 8, 5, 85)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 233 in command -
+INSERT INTO inventory VALUES (69, 10, 3, 42)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 234 in command -
+INSERT INTO inventory VALUES (70, 37, 4, 12)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 235 in command -
+INSERT INTO inventory VALUES (71, 43, 2, 15)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 236 in command -
+INSERT INTO inventory VALUES (72, 43, 1, 23)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 237 in command -
+INSERT INTO inventory VALUES (73, 49, 2, 71)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 238 in command -
+INSERT INTO inventory VALUES (74, 28, 5, 24)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 239 in command -
+INSERT INTO inventory VALUES (75, 43, 3, 8)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 240 in command -
+INSERT INTO inventory VALUES (76, 17, 4, 87)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 241 in command -
+INSERT INTO inventory VALUES (77, 24, 2, 82)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 242 in command -
+INSERT INTO inventory VALUES (78, 48, 3, 15)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 243 in command -
+INSERT INTO inventory VALUES (79, 50, 1, 39)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 244 in command -
+INSERT INTO inventory VALUES (80, 11, 4, 99)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 245 in command -
+INSERT INTO inventory VALUES (81, 4, 3, 12)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 246 in command -
+INSERT INTO inventory VALUES (82, 9, 3, 50)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 247 in command -
+INSERT INTO inventory VALUES (83, 8, 3, 11)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 248 in command -
+INSERT INTO inventory VALUES (84, 45, 1, 97)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 249 in command -
+INSERT INTO inventory VALUES (85, 1, 4, 61)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 250 in command -
+INSERT INTO inventory VALUES (86, 18, 3, 54)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 251 in command -
+INSERT INTO inventory VALUES (87, 7, 2, 100)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 252 in command -
+INSERT INTO inventory VALUES (88, 9, 5, 5)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 253 in command -
+INSERT INTO inventory VALUES (89, 31, 1, 21)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 254 in command -
+INSERT INTO inventory VALUES (90, 36, 5, 89)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 255 in command -
+INSERT INTO inventory VALUES (91, 15, 2, 92)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 256 in command -
+INSERT INTO inventory VALUES (92, 3, 3, 42)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 257 in command -
+INSERT INTO inventory VALUES (93, 19, 3, 83)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 258 in command -
+INSERT INTO inventory VALUES (94, 26, 2, 11)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 259 in command -
+INSERT INTO inventory VALUES (95, 19, 1, 10)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 260 in command -
+INSERT INTO inventory VALUES (96, 21, 2, 35)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 261 in command -
+INSERT INTO inventory VALUES (97, 27, 1, 89)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 262 in command -
+INSERT INTO inventory VALUES (98, 9, 1, 81)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 263 in command -
+INSERT INTO inventory VALUES (99, 13, 3, 37)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 264 in command -
+INSERT INTO inventory VALUES (100, 22, 5, 16)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 265 in command -
+INSERT INTO inventory VALUES (101, 48, 2, 35)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 266 in command -
+INSERT INTO inventory VALUES (102, 17, 4, 6)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 267 in command -
+INSERT INTO inventory VALUES (103, 20, 5, 83)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 268 in command -
+INSERT INTO inventory VALUES (104, 28, 1, 17)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 269 in command -
+INSERT INTO inventory VALUES (105, 23, 1, 7)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 270 in command -
+INSERT INTO inventory VALUES (106, 12, 1, 21)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 271 in command -
+INSERT INTO inventory VALUES (107, 3, 4, 6)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 272 in command -
+INSERT INTO inventory VALUES (108, 15, 2, 64)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 273 in command -
+INSERT INTO inventory VALUES (109, 25, 2, 1)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 274 in command -
+INSERT INTO inventory VALUES (110, 23, 1, 82)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 275 in command -
+INSERT INTO inventory VALUES (111, 41, 3, 76)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 276 in command -
+INSERT INTO inventory VALUES (112, 41, 3, 48)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 277 in command -
+INSERT INTO inventory VALUES (113, 21, 3, 76)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 278 in command -
+INSERT INTO inventory VALUES (114, 4, 3, 30)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 279 in command -
+INSERT INTO inventory VALUES (115, 11, 1, 59)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 280 in command -
+INSERT INTO inventory VALUES (116, 13, 5, 56)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 281 in command -
+INSERT INTO inventory VALUES (117, 39, 2, 84)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 282 in command -
+INSERT INTO inventory VALUES (118, 34, 2, 73)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 283 in command -
+INSERT INTO inventory VALUES (119, 24, 4, 78)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 284 in command -
+INSERT INTO inventory VALUES (120, 22, 5, 33)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 285 in command -
+INSERT INTO inventory VALUES (121, 47, 3, 84)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 286 in command -
+INSERT INTO inventory VALUES (122, 26, 4, 51)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 287 in command -
+INSERT INTO inventory VALUES (123, 31, 1, 48)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 288 in command -
+INSERT INTO inventory VALUES (124, 1, 1, 49)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 289 in command -
+INSERT INTO inventory VALUES (125, 26, 4, 50)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 290 in command -
+INSERT INTO inventory VALUES (126, 25, 4, 58)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 291 in command -
+INSERT INTO inventory VALUES (127, 4, 2, 82)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 292 in command -
+INSERT INTO inventory VALUES (128, 3, 5, 15)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 293 in command -
+INSERT INTO inventory VALUES (129, 20, 4, 47)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 294 in command -
+INSERT INTO inventory VALUES (130, 8, 3, 35)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 295 in command -
+INSERT INTO inventory VALUES (131, 27, 3, 98)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 296 in command -
+INSERT INTO inventory VALUES (132, 33, 3, 68)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 297 in command -
+INSERT INTO inventory VALUES (133, 25, 4, 27)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 298 in command -
+INSERT INTO inventory VALUES (134, 44, 5, 23)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 299 in command -
+INSERT INTO inventory VALUES (135, 26, 1, 43)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 300 in command -
+INSERT INTO inventory VALUES (136, 11, 1, 66)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 301 in command -
+INSERT INTO inventory VALUES (137, 18, 4, 19)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 302 in command -
+INSERT INTO inventory VALUES (138, 18, 3, 90)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 303 in command -
+INSERT INTO inventory VALUES (139, 48, 3, 1)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 304 in command -
+INSERT INTO inventory VALUES (140, 39, 2, 73)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 305 in command -
+INSERT INTO inventory VALUES (141, 37, 5, 76)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 306 in command -
+INSERT INTO inventory VALUES (142, 26, 2, 56)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 307 in command -
+INSERT INTO inventory VALUES (143, 27, 4, 91)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 308 in command -
+INSERT INTO inventory VALUES (144, 45, 3, 67)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 309 in command -
+INSERT INTO inventory VALUES (145, 44, 4, 5)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 310 in command -
+INSERT INTO inventory VALUES (146, 44, 4, 66)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 311 in command -
+INSERT INTO inventory VALUES (147, 2, 1, 63)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 312 in command -
+INSERT INTO inventory VALUES (148, 29, 2, 91)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 313 in command -
+INSERT INTO inventory VALUES (149, 35, 5, 69)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 314 in command -
+INSERT INTO inventory VALUES (150, 19, 4, 77)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 315 in command -
+INSERT INTO inventory VALUES (151, 46, 2, 92)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 316 in command -
+INSERT INTO inventory VALUES (152, 30, 5, 30)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 317 in command -
+INSERT INTO inventory VALUES (153, 11, 4, 81)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 318 in command -
+INSERT INTO inventory VALUES (154, 28, 4, 48)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 319 in command -
+INSERT INTO inventory VALUES (155, 8, 3, 36)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 320 in command -
+INSERT INTO inventory VALUES (156, 31, 3, 100)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 321 in command -
+INSERT INTO inventory VALUES (157, 18, 4, 29)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 322 in command -
+INSERT INTO inventory VALUES (158, 13, 5, 39)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 323 in command -
+INSERT INTO inventory VALUES (159, 19, 5, 62)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 324 in command -
+INSERT INTO inventory VALUES (160, 13, 4, 97)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 325 in command -
+INSERT INTO inventory VALUES (161, 46, 3, 1)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 326 in command -
+INSERT INTO inventory VALUES (162, 28, 4, 92)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 327 in command -
+INSERT INTO inventory VALUES (163, 39, 5, 23)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 328 in command -
+INSERT INTO inventory VALUES (164, 4, 1, 89)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 329 in command -
+INSERT INTO inventory VALUES (165, 14, 5, 22)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 330 in command -
+INSERT INTO inventory VALUES (166, 39, 5, 39)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 331 in command -
+INSERT INTO inventory VALUES (167, 17, 2, 45)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 332 in command -
+INSERT INTO inventory VALUES (168, 31, 1, 92)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 333 in command -
+INSERT INTO inventory VALUES (169, 41, 4, 99)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 334 in command -
+INSERT INTO inventory VALUES (170, 26, 3, 15)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 335 in command -
+INSERT INTO inventory VALUES (171, 4, 1, 61)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 336 in command -
+INSERT INTO inventory VALUES (172, 17, 4, 3)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 337 in command -
+INSERT INTO inventory VALUES (173, 13, 3, 11)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 338 in command -
+INSERT INTO inventory VALUES (174, 28, 2, 66)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 339 in command -
+INSERT INTO inventory VALUES (175, 26, 3, 19)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 340 in command -
+INSERT INTO inventory VALUES (176, 19, 2, 74)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 341 in command -
+INSERT INTO inventory VALUES (177, 7, 4, 46)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 342 in command -
+INSERT INTO inventory VALUES (178, 32, 4, 5)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 343 in command -
+INSERT INTO inventory VALUES (179, 35, 1, 94)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 344 in command -
+INSERT INTO inventory VALUES (180, 19, 2, 72)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 345 in command -
+INSERT INTO inventory VALUES (181, 29, 5, 60)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 346 in command -
+INSERT INTO inventory VALUES (182, 11, 3, 21)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 347 in command -
+INSERT INTO inventory VALUES (183, 45, 1, 55)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 348 in command -
+INSERT INTO inventory VALUES (184, 35, 3, 33)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 349 in command -
+INSERT INTO inventory VALUES (185, 20, 1, 68)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 350 in command -
+INSERT INTO inventory VALUES (186, 33, 4, 38)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 351 in command -
+INSERT INTO inventory VALUES (187, 20, 1, 61)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 352 in command -
+INSERT INTO inventory VALUES (188, 9, 2, 45)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 353 in command -
+INSERT INTO inventory VALUES (189, 6, 4, 96)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 354 in command -
+INSERT INTO inventory VALUES (190, 43, 5, 70)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 355 in command -
+INSERT INTO inventory VALUES (191, 16, 1, 27)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 356 in command -
+INSERT INTO inventory VALUES (192, 42, 3, 85)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 357 in command -
+INSERT INTO inventory VALUES (193, 50, 2, 18)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 358 in command -
+INSERT INTO inventory VALUES (194, 43, 1, 24)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 359 in command -
+INSERT INTO inventory VALUES (195, 16, 2, 91)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 360 in command -
+INSERT INTO inventory VALUES (196, 5, 4, 67)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 361 in command -
+INSERT INTO inventory VALUES (197, 44, 5, 80)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 362 in command -
+INSERT INTO inventory VALUES (198, 26, 5, 76)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 363 in command -
+INSERT INTO inventory VALUES (199, 33, 1, 54)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 364 in command -
+INSERT INTO inventory VALUES (200, 17, 5, 70)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008223) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+>> Inserting clients...
+
+Error starting at line : 367 in command -
+INSERT INTO client VALUES (1,  'Rahul Sharma', 'Delhi')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008226) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 368 in command -
+INSERT INTO client VALUES (2,  'Anita Nair',   'Kochi')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008226) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 369 in command -
+INSERT INTO client VALUES (3,  'Arjun Patel',  'Ahmedabad')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008226) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 370 in command -
+INSERT INTO client VALUES (4,  'Sneha Reddy',  'Hyderabad')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008226) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 371 in command -
+INSERT INTO client VALUES (5,  'Vikram Singh', 'Jaipur')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008226) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 372 in command -
+INSERT INTO client VALUES (6,  'Meera Iyer',   'Chennai')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008226) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 373 in command -
+INSERT INTO client VALUES (7,  'Karan Mehta',  'Mumbai')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008226) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 374 in command -
+INSERT INTO client VALUES (8,  'Priya Das',    'Kolkata')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008226) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 375 in command -
+INSERT INTO client VALUES (9,  'Rohit Verma',  'Lucknow')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008226) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 376 in command -
+INSERT INTO client VALUES (10, 'Neha Kapoor',  'Bangalore')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008226) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+>> Inserting orders...
+
+Error starting at line : 379 in command -
+INSERT INTO orders VALUES (101, 1,  SYSDATE, 'Pending')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008227) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 380 in command -
+INSERT INTO orders VALUES (102, 2,  SYSDATE, 'Processing')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008227) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 381 in command -
+INSERT INTO orders VALUES (103, 3,  SYSDATE, 'Pending')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008227) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 382 in command -
+INSERT INTO orders VALUES (104, 4,  SYSDATE, 'Processing')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008227) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 383 in command -
+INSERT INTO orders VALUES (105, 5,  SYSDATE, 'Pending')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008227) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 384 in command -
+INSERT INTO orders VALUES (106, 6,  SYSDATE, 'Shipped')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008227) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 385 in command -
+INSERT INTO orders VALUES (107, 7,  SYSDATE, 'Delivered')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008227) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 386 in command -
+INSERT INTO orders VALUES (108, 8,  SYSDATE, 'Pending')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008227) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 387 in command -
+INSERT INTO orders VALUES (109, 9,  SYSDATE, 'Processing')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008227) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 388 in command -
+INSERT INTO orders VALUES (110, 10, SYSDATE, 'Shipped')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008227) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 389 in command -
+INSERT INTO orders VALUES (111, 1,  SYSDATE, 'Delivered')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008227) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 390 in command -
+INSERT INTO orders VALUES (112, 2,  SYSDATE, 'Pending')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008227) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 391 in command -
+INSERT INTO orders VALUES (113, 3,  SYSDATE, 'Processing')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008227) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 392 in command -
+INSERT INTO orders VALUES (114, 4,  SYSDATE, 'Shipped')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008227) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 393 in command -
+INSERT INTO orders VALUES (115, 5,  SYSDATE, 'Delivered')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008227) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 394 in command -
+INSERT INTO orders VALUES (116, 6,  SYSDATE, 'Pending')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008227) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 395 in command -
+INSERT INTO orders VALUES (117, 7,  SYSDATE, 'Processing')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008227) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 396 in command -
+INSERT INTO orders VALUES (118, 8,  SYSDATE, 'Shipped')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008227) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 397 in command -
+INSERT INTO orders VALUES (119, 9,  SYSDATE, 'Delivered')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008227) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 398 in command -
+INSERT INTO orders VALUES (120, 10, SYSDATE, 'Pending')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008227) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+>> Inserting vehicles...
+
+Error starting at line : 401 in command -
+INSERT INTO vehicle VALUES (301, 'Truck',              2000)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008229) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 402 in command -
+INSERT INTO vehicle VALUES (302, 'Van',                1200)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008229) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 403 in command -
+INSERT INTO vehicle VALUES (303, 'Mini Truck',         1500)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008229) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 404 in command -
+INSERT INTO vehicle VALUES (304, 'Pickup',              900)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008229) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 405 in command -
+INSERT INTO vehicle VALUES (305, 'Container Truck',    5000)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008229) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 406 in command -
+INSERT INTO vehicle VALUES (306, 'Cargo Van',          1100)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008229) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 407 in command -
+INSERT INTO vehicle VALUES (307, 'Heavy Truck',        4000)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008229) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 408 in command -
+INSERT INTO vehicle VALUES (308, 'Delivery Van',       1000)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008229) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 409 in command -
+INSERT INTO vehicle VALUES (309, 'Transport Truck',    3500)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008229) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 410 in command -
+INSERT INTO vehicle VALUES (310, 'Mini Van',            800)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008229) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 411 in command -
+INSERT INTO vehicle VALUES (311, 'Freight Truck',      4500)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008229) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 412 in command -
+INSERT INTO vehicle VALUES (312, 'Utility Truck',      2200)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008229) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 413 in command -
+INSERT INTO vehicle VALUES (313, 'Box Truck',          3000)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008229) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 414 in command -
+INSERT INTO vehicle VALUES (314, 'Refrigerated Truck', 2800)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008229) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 415 in command -
+INSERT INTO vehicle VALUES (315, 'Panel Van',           950)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008229) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 416 in command -
+INSERT INTO vehicle VALUES (316, 'Flatbed Truck',      4200)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008229) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 417 in command -
+INSERT INTO vehicle VALUES (317, 'Light Truck',        1800)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008229) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 418 in command -
+INSERT INTO vehicle VALUES (318, 'Cargo Truck',        2600)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008229) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 419 in command -
+INSERT INTO vehicle VALUES (319, 'Delivery Truck',     2400)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008229) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 420 in command -
+INSERT INTO vehicle VALUES (320, 'Small Van',           700)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008229) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 421 in command -
+INSERT INTO vehicle VALUES (321, 'Medium Truck',       3200)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008229) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 422 in command -
+INSERT INTO vehicle VALUES (322, 'Long Haul Truck',    4800)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008229) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 423 in command -
+INSERT INTO vehicle VALUES (323, 'Utility Van',        1000)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008229) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 424 in command -
+INSERT INTO vehicle VALUES (324, 'Logistics Truck',    3600)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008229) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 425 in command -
+INSERT INTO vehicle VALUES (325, 'Supply Truck',       2900)
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008229) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+>> Inserting drivers...
+
+Error starting at line : 428 in command -
+INSERT INTO driver VALUES (201, 'John Smith',       'DL10001')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008230) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 429 in command -
+INSERT INTO driver VALUES (202, 'Michael Brown',    'DL10002')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008230) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 430 in command -
+INSERT INTO driver VALUES (203, 'David Johnson',    'DL10003')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008230) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 431 in command -
+INSERT INTO driver VALUES (204, 'Robert Davis',     'DL10004')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008230) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 432 in command -
+INSERT INTO driver VALUES (205, 'James Wilson',     'DL10005')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008230) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 433 in command -
+INSERT INTO driver VALUES (206, 'William Taylor',   'DL10006')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008230) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 434 in command -
+INSERT INTO driver VALUES (207, 'Christopher Moore','DL10007')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008230) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 435 in command -
+INSERT INTO driver VALUES (208, 'Daniel Anderson',  'DL10008')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008230) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 436 in command -
+INSERT INTO driver VALUES (209, 'Matthew Thomas',   'DL10009')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008230) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 437 in command -
+INSERT INTO driver VALUES (210, 'Anthony Jackson',  'DL10010')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008230) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 438 in command -
+INSERT INTO driver VALUES (211, 'Mark White',       'DL10011')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008230) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 439 in command -
+INSERT INTO driver VALUES (212, 'Paul Harris',      'DL10012')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008230) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 440 in command -
+INSERT INTO driver VALUES (213, 'Steven Martin',    'DL10013')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008230) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 441 in command -
+INSERT INTO driver VALUES (214, 'Andrew Thompson',  'DL10014')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008230) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 442 in command -
+INSERT INTO driver VALUES (215, 'Joshua Garcia',    'DL10015')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008230) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 443 in command -
+INSERT INTO driver VALUES (216, 'Kevin Martinez',   'DL10016')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008230) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 444 in command -
+INSERT INTO driver VALUES (217, 'Brian Robinson',   'DL10017')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008230) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 445 in command -
+INSERT INTO driver VALUES (218, 'George Clark',     'DL10018')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008230) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 446 in command -
+INSERT INTO driver VALUES (219, 'Edward Lewis',     'DL10019')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008230) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 447 in command -
+INSERT INTO driver VALUES (220, 'Ryan Walker',      'DL10020')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008230) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 448 in command -
+INSERT INTO driver VALUES (221, 'Jacob Hall',       'DL10021')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008230) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 449 in command -
+INSERT INTO driver VALUES (222, 'Jason Allen',      'DL10022')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008230) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 450 in command -
+INSERT INTO driver VALUES (223, 'Nathan Young',     'DL10023')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008230) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 451 in command -
+INSERT INTO driver VALUES (224, 'Adam King',        'DL10024')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008230) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 452 in command -
+INSERT INTO driver VALUES (225, 'Justin Wright',    'DL10025')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008230) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+>> Inserting shipments...
+
+Error starting at line : 455 in command -
+INSERT INTO shipment VALUES (401, 101, 301, 201, 'In Transit')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008232) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 456 in command -
+INSERT INTO shipment VALUES (402, 102, 302, 202, 'In Transit')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008232) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 457 in command -
+INSERT INTO shipment VALUES (403, 103, 303, 203, 'Pending')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008232) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 458 in command -
+INSERT INTO shipment VALUES (404, 104, 304, 204, 'In Transit')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008232) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 459 in command -
+INSERT INTO shipment VALUES (405, 105, 305, 205, 'Pending')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008232) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 460 in command -
+INSERT INTO shipment VALUES (406, 106, 306, 206, 'Delivered')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008232) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 461 in command -
+INSERT INTO shipment VALUES (407, 107, 307, 207, 'Delivered')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008232) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 462 in command -
+INSERT INTO shipment VALUES (408, 108, 308, 208, 'Pending')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008232) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 463 in command -
+INSERT INTO shipment VALUES (409, 109, 309, 209, 'In Transit')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008232) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 464 in command -
+INSERT INTO shipment VALUES (410, 110, 310, 210, 'Delivered')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008232) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 465 in command -
+INSERT INTO shipment VALUES (411, 111, 311, 211, 'Delivered')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008232) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 466 in command -
+INSERT INTO shipment VALUES (412, 112, 312, 212, 'Pending')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008232) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 467 in command -
+INSERT INTO shipment VALUES (413, 113, 313, 213, 'In Transit')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008232) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 468 in command -
+INSERT INTO shipment VALUES (414, 114, 314, 214, 'Delivered')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008232) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 469 in command -
+INSERT INTO shipment VALUES (415, 115, 315, 215, 'Delivered')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008232) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 470 in command -
+INSERT INTO shipment VALUES (416, 116, 316, 216, 'Pending')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008232) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 471 in command -
+INSERT INTO shipment VALUES (417, 117, 317, 217, 'In Transit')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008232) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 472 in command -
+INSERT INTO shipment VALUES (418, 118, 318, 218, 'Delivered')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008232) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 473 in command -
+INSERT INTO shipment VALUES (419, 119, 319, 219, 'Delivered')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008232) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Error starting at line : 474 in command -
+INSERT INTO shipment VALUES (420, 120, 320, 220, 'Pending')
+Error report -
+ORA-00001: unique constraint (SYSTEM.SYS_C008232) violated
+
+https://docs.oracle.com/error-help/db/ora-00001/
+
+More Details :
+https://docs.oracle.com/error-help/db/ora-00001/
+
+Commit complete.
+
+>> All data inserted and committed successfully.
+
+============================================================
+SECTION 3 : TRIGGERS
+============================================================
+
+
+Trigger TRG_SYNC_ORDER_STATUS compiled
+
+>> Trigger TRG_SYNC_ORDER_STATUS created.
+
+Trigger TRG_CHECK_INVENTORY_QUANTITY compiled
+
+>> Trigger TRG_CHECK_INVENTORY_QUANTITY created.
+
+============================================================
+SECTION 4 : VIEWS
+============================================================
+
+
+View SHIPMENT_TRACKING_VIEW created.
+
+>> View SHIPMENT_TRACKING_VIEW created.
+
+View SUPPLY_CHAIN_VIEW created.
+
+>> View SUPPLY_CHAIN_VIEW created.
+
+View INVENTORY_STATUS_VIEW created.
+
+>> View INVENTORY_STATUS_VIEW created.
+
+============================================================
+SECTION 5 : QUERIES
+============================================================
+
+>> Q1: Product list (highest price first)
+
+PRODUCT_ID PRODUCT_NAME                    PRICE
+---------- ------------------------------ ------
+        48 Action Camera                    7999
+        39 Faux Fur Coat                    3499
+         9 Water-Resistant Bluetooth Spea   2499
+           ker
+
+        14 Pressure Cooker                  2199
+        23 Handheld Vacuum                  1999
+        16 Lightweight Travel Backpack      1799
+        37 Luxury Bath Robe                 1599
+        12 Wireless Charging Station        1499
+        15 Personal Blender                 1299
+        44 LED Table Lamp                   1199
+        43 Stainless Steel Cutlery Set       999
+        32 Wall Art                          999
+        36 Magnetic Screen Door              899
+         5 Frozen Salmon Filets              850
+        49 Cotton Pajama Set                 849
+         2 Car Phone Mount                   799
+        20 Adjustable Resistance Bands       749
+         6 Puzzle Mat                        699
+        41 Motorcycle Phone Mount            699
+        40 Training Soccer Ball              649
+         1 Yoga Mat Carrier                  599
+        22 Bamboo Cutting Board              549
+        19 Basil-infused Olive Oil           499
+         3 Watercolor Set                    450
+        42 Maple Syrup                       450
+        33 Fitness Jump Rope                 399
+        45 Oven Thermometer                  399
+        38 Almond Flour Bread Mix            399
+        13 Hummus Variety Pack               350
+        35 Thai Coconut Curry Sauce          349
+         7 Smartphone Stand                  349
+         4 Lemon Herb Quinoa                 320
+        29 Honey Roasted Almonds             299
+        47 Tahini                            299
+        18 Maple Pecan Pancake Mix           299
+        25 Classic Caesar Salad Kit          280
+        30 Cheesy Cauliflower Bake           250
+        24 Chipotle Black Bean Salad         220
+        10 Beet Salad                        180
+        26 Honey Glazed Carrots              160
+        21 Organic Brown Sugar               149
+        27 Honey Wheat Pretzels              130
+        50 Ginger Snaps                      120
+         8 Lentil Soup (canned)              120
+        31 Lentil Soup                       110
+
+PRODUCT_ID PRODUCT_NAME                    PRICE
+---------- ------------------------------ ------
+        11 Flavored Rice Cakes                99
+        34 Pineapple Chunks (canned)          90
+        46 Baked Potato Chips                 80
+        17 Sparkling Blood Orange Soda        60
+        28 Fresh Basil                        50
+
+50 rows selected.
+
+>> Q2: Clients and their orders
+
+ CLIENT_ID NAME                 ADDRESS         ORDER_ID ORDER_DATE     STATUS
+---------- -------------------- --------------- -------- -------------- ------------
+         1 Rahul Sharma         Delhi                101 27-MAR-2026    Pending
+         1 Rahul Sharma         Delhi                111 27-MAR-2026    Delivered
+         2 Anita Nair           Kochi                102 27-MAR-2026    Processing
+         2 Anita Nair           Kochi                112 27-MAR-2026    Pending
+         3 Arjun Patel          Ahmedabad            103 27-MAR-2026    Pending
+         3 Arjun Patel          Ahmedabad            113 27-MAR-2026    Processing
+         4 Sneha Reddy          Hyderabad            104 27-MAR-2026    Processing
+         4 Sneha Reddy          Hyderabad            114 27-MAR-2026    Shipped
+         5 Vikram Singh         Jaipur               105 27-MAR-2026    Pending
+         5 Vikram Singh         Jaipur               115 27-MAR-2026    Delivered
+         6 Meera Iyer           Chennai              106 27-MAR-2026    Shipped
+         6 Meera Iyer           Chennai              116 27-MAR-2026    Pending
+         7 Karan Mehta          Mumbai               107 27-MAR-2026    Delivered
+         7 Karan Mehta          Mumbai               117 27-MAR-2026    Processing
+         8 Priya Das            Kolkata              108 27-MAR-2026    Pending
+         8 Priya Das            Kolkata              118 27-MAR-2026    Shipped
+         9 Rohit Verma          Lucknow              109 27-MAR-2026    Processing
+         9 Rohit Verma          Lucknow              119 27-MAR-2026    Delivered
+        10 Neha Kapoor          Bangalore            120 27-MAR-2026    Pending
+        10 Neha Kapoor          Bangalore            110 27-MAR-2026    Shipped
+
+20 rows selected.
+
+>> Q3: Shipment details with driver and vehicle
+
+SHIPMENT_ID SHIPMENT_STA DRIVER_NAME          LICENSE_NO VEHICLE_TYPE           CAPACITY
+----------- ------------ -------------------- ---------- ---------------------- --------
+        401 In Transit   John Smith           DL10001    Truck                      2000
+        402 In Transit   Michael Brown        DL10002    Van                        1200
+        403 Pending      David Johnson        DL10003    Mini Truck                 1500
+        404 In Transit   Robert Davis         DL10004    Pickup                      900
+        405 Pending      James Wilson         DL10005    Container Truck            5000
+        406 Delivered    William Taylor       DL10006    Cargo Van                  1100
+        407 Delivered    Christopher Moore    DL10007    Heavy Truck                4000
+        408 Pending      Daniel Anderson      DL10008    Delivery Van               1000
+        409 In Transit   Matthew Thomas       DL10009    Transport Truck            3500
+        410 Delivered    Anthony Jackson      DL10010    Mini Van                    800
+        411 Delivered    Mark White           DL10011    Freight Truck              4500
+        412 Pending      Paul Harris          DL10012    Utility Truck              2200
+        413 In Transit   Steven Martin        DL10013    Box Truck                  3000
+        414 Delivered    Andrew Thompson      DL10014    Refrigerated Truck         2800
+        415 Delivered    Joshua Garcia        DL10015    Panel Van                   950
+        416 Pending      Kevin Martinez       DL10016    Flatbed Truck              4200
+        417 In Transit   Brian Robinson       DL10017    Light Truck                1800
+        418 Delivered    George Clark         DL10018    Cargo Truck                2600
+        419 Delivered    Edward Lewis         DL10019    Delivery Truck             2400
+        420 Pending      Ryan Walker          DL10020    Small Van                   700
+
+20 rows selected.
+
+>> Q4: Full supply chain (client to delivery)
+
+CLIENT_NAME          ORDER_ID ORDER_DATE     ORDER_STATUS SHIPMENT_ID SHIPMENT_STA DRIVER_NAME
+-------------------- -------- -------------- ------------ ----------- ------------ --------------------
+VEHICLE_TYPE
+----------------------
+Rahul Sharma              101 27-03-26       Pending              401 In Transit   John Smith
+Truck
+
+Anita Nair                102 27-03-26       Processing           402 In Transit   Michael Brown
+Van
+
+Arjun Patel               103 27-03-26       Pending              403 Pending      David Johnson
+Mini Truck
+
+Sneha Reddy               104 27-03-26       Processing           404 In Transit   Robert Davis
+Pickup
+
+Vikram Singh              105 27-03-26       Pending              405 Pending      James Wilson
+Container Truck
+
+Meera Iyer                106 27-03-26       Shipped              406 Delivered    William Taylor
+Cargo Van
+
+Karan Mehta               107 27-03-26       Delivered            407 Delivered    Christopher Moore
+Heavy Truck
+
+Priya Das                 108 27-03-26       Pending              408 Pending      Daniel Anderson
+Delivery Van
+
+Rohit Verma               109 27-03-26       Processing           409 In Transit   Matthew Thomas
+Transport Truck
+
+Neha Kapoor               110 27-03-26       Shipped              410 Delivered    Anthony Jackson
+Mini Van
+
+Rahul Sharma              111 27-03-26       Delivered            411 Delivered    Mark White
+Freight Truck
+
+Anita Nair                112 27-03-26       Pending              412 Pending      Paul Harris
+Utility Truck
+
+Arjun Patel               113 27-03-26       Processing           413 In Transit   Steven Martin
+Box Truck
+
+Sneha Reddy               114 27-03-26       Shipped              414 Delivered    Andrew Thompson
+Refrigerated Truck
+
+Vikram Singh              115 27-03-26       Delivered            415 Delivered    Joshua Garcia
+Panel Van
+
+
+CLIENT_NAME          ORDER_ID ORDER_DATE     ORDER_STATUS SHIPMENT_ID SHIPMENT_STA DRIVER_NAME
+-------------------- -------- -------------- ------------ ----------- ------------ --------------------
+VEHICLE_TYPE
+----------------------
+Meera Iyer                116 27-03-26       Pending              416 Pending      Kevin Martinez
+Flatbed Truck
+
+Karan Mehta               117 27-03-26       Processing           417 In Transit   Brian Robinson
+Light Truck
+
+Priya Das                 118 27-03-26       Shipped              418 Delivered    George Clark
+Cargo Truck
+
+Rohit Verma               119 27-03-26       Delivered            419 Delivered    Edward Lewis
+Delivery Truck
+
+Neha Kapoor               120 27-03-26       Pending              420 Pending      Ryan Walker
+Small Van
+
+
+20 rows selected.
+
+>> Q5: Inventory status report
+
+PRODUCT_NAME                   WAREHOUSE    QUANTITY STOCK_STAT
+------------------------------ ------------ -------- ----------
+Action Camera                  Bangalore          35 Adequate
+Almond Flour Bread Mix         Bangalore          99 Adequate
+Baked Potato Chips             Bangalore         100 Adequate
+Baked Potato Chips             Bangalore          92 Adequate
+Bamboo Cutting Board           Bangalore          19 Low
+Bamboo Cutting Board           Bangalore          17 Low
+Basil-infused Olive Oil        Bangalore          72 Adequate
+Basil-infused Olive Oil        Bangalore          74 Adequate
+Chipotle Black Bean Salad      Bangalore          82 Adequate
+Classic Caesar Salad Kit       Bangalore           1 Critical
+Cotton Pajama Set              Bangalore          71 Adequate
+Faux Fur Coat                  Bangalore          84 Adequate
+Faux Fur Coat                  Bangalore          73 Adequate
+Fresh Basil                    Bangalore          66 Adequate
+Frozen Salmon Filets           Bangalore          72 Adequate
+Ginger Snaps                   Bangalore          18 Low
+Handheld Vacuum                Bangalore          38 Adequate
+Honey Glazed Carrots           Bangalore          56 Adequate
+Honey Glazed Carrots           Bangalore          11 Low
+Honey Roasted Almonds          Bangalore          91 Adequate
+LED Table Lamp                 Bangalore          33 Adequate
+Lemon Herb Quinoa              Bangalore          82 Adequate
+Lightweight Travel Backpack    Bangalore          91 Adequate
+Magnetic Screen Door           Bangalore          45 Adequate
+Organic Brown Sugar            Bangalore          35 Adequate
+Organic Brown Sugar            Bangalore          50 Adequate
+Organic Brown Sugar            Bangalore          94 Adequate
+Personal Blender               Bangalore          64 Adequate
+Personal Blender               Bangalore          92 Adequate
+Personal Blender               Bangalore          93 Adequate
+Personal Blender               Bangalore          14 Low
+Pineapple Chunks (canned)      Bangalore          73 Adequate
+Pineapple Chunks (canned)      Bangalore           9 Critical
+Pressure Cooker                Bangalore          58 Adequate
+Smartphone Stand               Bangalore         100 Adequate
+Sparkling Blood Orange Soda    Bangalore          45 Adequate
+Stainless Steel Cutlery Set    Bangalore          15 Low
+Water-Resistant Bluetooth Spea Bangalore          65 Adequate
+ker
+
+Water-Resistant Bluetooth Spea Bangalore          45 Adequate
+ker
+
+Yoga Mat Carrier               Bangalore          80 Adequate
+Adjustable Resistance Bands    Chennai            61 Adequate
+Adjustable Resistance Bands    Chennai            68 Adequate
+Almond Flour Bread Mix         Chennai             5 Critical
+
+PRODUCT_NAME                   WAREHOUSE    QUANTITY STOCK_STAT
+------------------------------ ------------ -------- ----------
+Almond Flour Bread Mix         Chennai            99 Adequate
+Basil-infused Olive Oil        Chennai            10 Low
+Car Phone Mount                Chennai            63 Adequate
+Fitness Jump Rope              Chennai            54 Adequate
+Flavored Rice Cakes            Chennai            59 Adequate
+Flavored Rice Cakes            Chennai            74 Adequate
+Flavored Rice Cakes            Chennai            66 Adequate
+Fresh Basil                    Chennai            17 Low
+Ginger Snaps                   Chennai            39 Adequate
+Handheld Vacuum                Chennai            86 Adequate
+Handheld Vacuum                Chennai             7 Critical
+Handheld Vacuum                Chennai            82 Adequate
+Honey Glazed Carrots           Chennai            88 Adequate
+Honey Glazed Carrots           Chennai            43 Adequate
+Honey Wheat Pretzels           Chennai            89 Adequate
+LED Table Lamp                 Chennai             2 Critical
+Lemon Herb Quinoa              Chennai            89 Adequate
+Lemon Herb Quinoa              Chennai            61 Adequate
+Lentil Soup                    Chennai            92 Adequate
+Lentil Soup                    Chennai            21 Adequate
+Lentil Soup                    Chennai            48 Adequate
+Lightweight Travel Backpack    Chennai            27 Adequate
+Lightweight Travel Backpack    Chennai             8 Critical
+Maple Pecan Pancake Mix        Chennai            72 Adequate
+Maple Syrup                    Chennai            24 Adequate
+Organic Brown Sugar            Chennai            60 Adequate
+Oven Thermometer               Chennai            97 Adequate
+Oven Thermometer               Chennai            55 Adequate
+Puzzle Mat                     Chennai           100 Adequate
+Puzzle Mat                     Chennai            68 Adequate
+Stainless Steel Cutlery Set    Chennai            24 Adequate
+Stainless Steel Cutlery Set    Chennai           100 Adequate
+Stainless Steel Cutlery Set    Chennai            56 Adequate
+Stainless Steel Cutlery Set    Chennai            23 Adequate
+Tahini                         Chennai            86 Adequate
+Thai Coconut Curry Sauce       Chennai            94 Adequate
+Wall Art                       Chennai            83 Adequate
+Water-Resistant Bluetooth Spea Chennai            81 Adequate
+ker
+
+Water-Resistant Bluetooth Spea Chennai            50 Adequate
+ker
+
+Watercolor Set                 Chennai            37 Adequate
+Wireless Charging Station      Chennai            21 Adequate
+Yoga Mat Carrier               Chennai            49 Adequate
+Adjustable Resistance Bands    Delhi              83 Adequate
+
+PRODUCT_NAME                   WAREHOUSE    QUANTITY STOCK_STAT
+------------------------------ ------------ -------- ----------
+Baked Potato Chips             Delhi              80 Adequate
+Bamboo Cutting Board           Delhi              33 Adequate
+Bamboo Cutting Board           Delhi              16 Low
+Basil-infused Olive Oil        Delhi              62 Adequate
+Cheesy Cauliflower Bake        Delhi              30 Adequate
+Chipotle Black Bean Salad      Delhi              42 Adequate
+Classic Caesar Salad Kit       Delhi              40 Adequate
+Faux Fur Coat                  Delhi              23 Adequate
+Faux Fur Coat                  Delhi              39 Adequate
+Fitness Jump Rope              Delhi              25 Adequate
+Flavored Rice Cakes            Delhi              64 Adequate
+Fresh Basil                    Delhi              24 Adequate
+Frozen Salmon Filets           Delhi              50 Adequate
+Frozen Salmon Filets           Delhi              45 Adequate
+Honey Glazed Carrots           Delhi              76 Adequate
+Honey Roasted Almonds          Delhi              60 Adequate
+Honey Roasted Almonds          Delhi              12 Low
+Hummus Variety Pack            Delhi              56 Adequate
+Hummus Variety Pack            Delhi              39 Adequate
+LED Table Lamp                 Delhi              23 Adequate
+LED Table Lamp                 Delhi              80 Adequate
+Lentil Soup                    Delhi              29 Adequate
+Lentil Soup (canned)           Delhi              85 Adequate
+Luxury Bath Robe               Delhi              76 Adequate
+Magnetic Screen Door           Delhi              89 Adequate
+Oven Thermometer               Delhi              73 Adequate
+Pressure Cooker                Delhi              22 Adequate
+Sparkling Blood Orange Soda    Delhi              70 Adequate
+Stainless Steel Cutlery Set    Delhi              83 Adequate
+Stainless Steel Cutlery Set    Delhi              70 Adequate
+Tahini                         Delhi               5 Critical
+Thai Coconut Curry Sauce       Delhi              69 Adequate
+Water-Resistant Bluetooth Spea Delhi               5 Critical
+ker
+
+Watercolor Set                 Delhi              15 Low
+Yoga Mat Carrier               Delhi              34 Adequate
+Action Camera                  Hyderabad          63 Adequate
+Action Camera                  Hyderabad           1 Critical
+Action Camera                  Hyderabad          15 Low
+Adjustable Resistance Bands    Hyderabad          46 Adequate
+Almond Flour Bread Mix         Hyderabad           9 Critical
+Almond Flour Bread Mix         Hyderabad          28 Adequate
+Baked Potato Chips             Hyderabad           1 Critical
+Basil-infused Olive Oil        Hyderabad          83 Adequate
+Beet Salad                     Hyderabad          42 Adequate
+Chipotle Black Bean Salad      Hyderabad          49 Adequate
+
+PRODUCT_NAME                   WAREHOUSE    QUANTITY STOCK_STAT
+------------------------------ ------------ -------- ----------
+Classic Caesar Salad Kit       Hyderabad          67 Adequate
+Fitness Jump Rope              Hyderabad          68 Adequate
+Flavored Rice Cakes            Hyderabad          21 Adequate
+Fresh Basil                    Hyderabad          73 Adequate
+Honey Glazed Carrots           Hyderabad          15 Low
+Honey Glazed Carrots           Hyderabad          19 Low
+Honey Wheat Pretzels           Hyderabad          98 Adequate
+Hummus Variety Pack            Hyderabad          37 Adequate
+Hummus Variety Pack            Hyderabad          11 Low
+LED Table Lamp                 Hyderabad          27 Adequate
+Lemon Herb Quinoa              Hyderabad          48 Adequate
+Lemon Herb Quinoa              Hyderabad          56 Adequate
+Lemon Herb Quinoa              Hyderabad          12 Low
+Lemon Herb Quinoa              Hyderabad          30 Adequate
+Lentil Soup                    Hyderabad         100 Adequate
+Lentil Soup (canned)           Hyderabad          11 Low
+Lentil Soup (canned)           Hyderabad          36 Adequate
+Lentil Soup (canned)           Hyderabad          35 Adequate
+Maple Pecan Pancake Mix        Hyderabad          90 Adequate
+Maple Pecan Pancake Mix        Hyderabad          54 Adequate
+Maple Syrup                    Hyderabad          28 Adequate
+Maple Syrup                    Hyderabad          85 Adequate
+Motorcycle Phone Mount         Hyderabad          48 Adequate
+Motorcycle Phone Mount         Hyderabad          76 Adequate
+Organic Brown Sugar            Hyderabad          76 Adequate
+Oven Thermometer               Hyderabad          67 Adequate
+Pineapple Chunks (canned)      Hyderabad          41 Adequate
+Stainless Steel Cutlery Set    Hyderabad           8 Critical
+Tahini                         Hyderabad          84 Adequate
+Thai Coconut Curry Sauce       Hyderabad          33 Adequate
+Water-Resistant Bluetooth Spea Hyderabad          70 Adequate
+ker
+
+Water-Resistant Bluetooth Spea Hyderabad          50 Adequate
+ker
+
+Watercolor Set                 Hyderabad          42 Adequate
+Adjustable Resistance Bands    Mumbai             47 Adequate
+Basil-infused Olive Oil        Mumbai             77 Adequate
+Basil-infused Olive Oil        Mumbai             63 Adequate
+Cheesy Cauliflower Bake        Mumbai             16 Low
+Chipotle Black Bean Salad      Mumbai             78 Adequate
+Classic Caesar Salad Kit       Mumbai             27 Adequate
+Classic Caesar Salad Kit       Mumbai             58 Adequate
+Fitness Jump Rope              Mumbai             38 Adequate
+Flavored Rice Cakes            Mumbai             81 Adequate
+Flavored Rice Cakes            Mumbai             99 Adequate
+
+PRODUCT_NAME                   WAREHOUSE    QUANTITY STOCK_STAT
+------------------------------ ------------ -------- ----------
+Fresh Basil                    Mumbai             92 Adequate
+Fresh Basil                    Mumbai             48 Adequate
+Frozen Salmon Filets           Mumbai             67 Adequate
+Honey Glazed Carrots           Mumbai             51 Adequate
+Honey Glazed Carrots           Mumbai             50 Adequate
+Honey Wheat Pretzels           Mumbai             91 Adequate
+Hummus Variety Pack            Mumbai             97 Adequate
+LED Table Lamp                 Mumbai             14 Low
+LED Table Lamp                 Mumbai             66 Adequate
+LED Table Lamp                 Mumbai              5 Critical
+Lightweight Travel Backpack    Mumbai             76 Adequate
+Luxury Bath Robe               Mumbai             12 Low
+Maple Pecan Pancake Mix        Mumbai             19 Low
+Maple Pecan Pancake Mix        Mumbai             29 Adequate
+Motorcycle Phone Mount         Mumbai             99 Adequate
+Organic Brown Sugar            Mumbai             68 Adequate
+Puzzle Mat                     Mumbai             96 Adequate
+Smartphone Stand               Mumbai             46 Adequate
+Sparkling Blood Orange Soda    Mumbai             87 Adequate
+Sparkling Blood Orange Soda    Mumbai              6 Critical
+Sparkling Blood Orange Soda    Mumbai              3 Critical
+Tahini                         Mumbai             59 Adequate
+Wall Art                       Mumbai              5 Critical
+Watercolor Set                 Mumbai             48 Adequate
+Watercolor Set                 Mumbai              6 Critical
+Yoga Mat Carrier               Mumbai             61 Adequate
+
+200 rows selected.
+
+>> Q6: Total stock per warehouse
+
+LOCATION     TOTAL_STOCK
+------------ -----------
+Chennai             2538
+Bangalore           2354
+Hyderabad           1953
+Mumbai              1885
+Delhi               1727
+
+5 rows selected.
+
+>> Q7: Low stock alert (quantity below 20)
+
+PRODUCT_NAME                   LOCATION     QUANTITY
+------------------------------ ------------ --------
+Action Camera                  Hyderabad           1
+Classic Caesar Salad Kit       Bangalore           1
+Baked Potato Chips             Hyderabad           1
+LED Table Lamp                 Chennai             2
+Sparkling Blood Orange Soda    Mumbai              3
+Almond Flour Bread Mix         Chennai             5
+Water-Resistant Bluetooth Spea Delhi               5
+ker
+
+LED Table Lamp                 Mumbai              5
+Wall Art                       Mumbai              5
+Tahini                         Delhi               5
+Sparkling Blood Orange Soda    Mumbai              6
+Watercolor Set                 Mumbai              6
+Handheld Vacuum                Chennai             7
+Lightweight Travel Backpack    Chennai             8
+Stainless Steel Cutlery Set    Hyderabad           8
+Almond Flour Bread Mix         Hyderabad           9
+Pineapple Chunks (canned)      Bangalore           9
+Basil-infused Olive Oil        Chennai            10
+Lentil Soup (canned)           Hyderabad          11
+Hummus Variety Pack            Hyderabad          11
+Honey Glazed Carrots           Bangalore          11
+Luxury Bath Robe               Mumbai             12
+Honey Roasted Almonds          Delhi              12
+Lemon Herb Quinoa              Hyderabad          12
+LED Table Lamp                 Mumbai             14
+Personal Blender               Bangalore          14
+Honey Glazed Carrots           Hyderabad          15
+Watercolor Set                 Delhi              15
+Action Camera                  Hyderabad          15
+Stainless Steel Cutlery Set    Bangalore          15
+Bamboo Cutting Board           Delhi              16
+Cheesy Cauliflower Bake        Mumbai             16
+Bamboo Cutting Board           Bangalore          17
+Fresh Basil                    Chennai            17
+Ginger Snaps                   Bangalore          18
+Honey Glazed Carrots           Hyderabad          19
+Bamboo Cutting Board           Bangalore          19
+Maple Pecan Pancake Mix        Mumbai             19
+
+38 rows selected.
+
+>> Q8: Number of orders per client
+
+NAME                 TOTAL_ORDERS
+-------------------- ------------
+Rahul Sharma                    2
+Anita Nair                      2
+Arjun Patel                     2
+Sneha Reddy                     2
+Neha Kapoor                     2
+Meera Iyer                      2
+Karan Mehta                     2
+Priya Das                       2
+Rohit Verma                     2
+Vikram Singh                    2
+
+10 rows selected.
+
+>> Q9: All delivered shipments
+
+SHIPMENT_ID ORDER_ID CLIENT          DRIVER               VEHICLE_TYPE
+----------- -------- --------------- -------------------- ----------------------
+        406      106 Meera Iyer      William Taylor       Cargo Van
+        407      107 Karan Mehta     Christopher Moore    Heavy Truck
+        410      110 Neha Kapoor     Anthony Jackson      Mini Van
+        411      111 Rahul Sharma    Mark White           Freight Truck
+        414      114 Sneha Reddy     Andrew Thompson      Refrigerated Truck
+        415      115 Vikram Singh    Joshua Garcia        Panel Van
+        418      118 Priya Das       George Clark         Cargo Truck
+        419      119 Rohit Verma     Edward Lewis         Delivery Truck
+
+8 rows selected.
+
+>> Q10: Vehicle and driver assignments
+
+VEHICLE_ID VEHICLE_TYPE           CAPACITY DRIVER_ASSIGNED      LICENSE_NO
+---------- ---------------------- -------- -------------------- ----------
+       301 Truck                      2000 John Smith           DL10001
+       302 Van                        1200 Michael Brown        DL10002
+       303 Mini Truck                 1500 David Johnson        DL10003
+       304 Pickup                      900 Robert Davis         DL10004
+       305 Container Truck            5000 James Wilson         DL10005
+       306 Cargo Van                  1100 William Taylor       DL10006
+       307 Heavy Truck                4000 Christopher Moore    DL10007
+       308 Delivery Van               1000 Daniel Anderson      DL10008
+       309 Transport Truck            3500 Matthew Thomas       DL10009
+       310 Mini Van                    800 Anthony Jackson      DL10010
+       311 Freight Truck              4500 Mark White           DL10011
+       312 Utility Truck              2200 Paul Harris          DL10012
+       313 Box Truck                  3000 Steven Martin        DL10013
+       314 Refrigerated Truck         2800 Andrew Thompson      DL10014
+       315 Panel Van                   950 Joshua Garcia        DL10015
+       316 Flatbed Truck              4200 Kevin Martinez       DL10016
+       317 Light Truck                1800 Brian Robinson       DL10017
+       318 Cargo Truck                2600 George Clark         DL10018
+       319 Delivery Truck             2400 Edward Lewis         DL10019
+       320 Small Van                   700 Ryan Walker          DL10020
+
+20 rows selected.
+
+
+============================================================
+SECTION 6 : ACCESS CONTROL
+============================================================
+
+
+Session altered.
+
+
+Error starting at line : 688 in command -
+CREATE USER scm_admin    IDENTIFIED BY admin123
+Error report -
+ORA-01920: user name 'SCM_ADMIN' conflicts with another user or role name
+
+https://docs.oracle.com/error-help/db/ora-01920/01920. 00000 -  "user name '%s' conflicts with another user or role name"
+*Cause:    There is already a user or role with that name.
+*Action:   Specify a different user name.
+
+Error starting at line : 689 in command -
+CREATE USER scm_employee IDENTIFIED BY employee123
+Error report -
+ORA-01920: user name 'SCM_EMPLOYEE' conflicts with another user or role name
+
+https://docs.oracle.com/error-help/db/ora-01920/01920. 00000 -  "user name '%s' conflicts with another user or role name"
+*Cause:    There is already a user or role with that name.
+*Action:   Specify a different user name.
+
+Error starting at line : 690 in command -
+CREATE USER scm_tracker  IDENTIFIED BY tracker123
+Error report -
+ORA-01920: user name 'SCM_TRACKER' conflicts with another user or role name
+
+https://docs.oracle.com/error-help/db/ora-01920/01920. 00000 -  "user name '%s' conflicts with another user or role name"
+*Cause:    There is already a user or role with that name.
+*Action:   Specify a different user name.
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+
+Grant succeeded.
+
+>> Users SCM_ADMIN, SCM_EMPLOYEE, SCM_TRACKER created and granted.
+
+============================================================
+VERIFICATION SUMMARY
+============================================================
+
+
+TABLE_NAME   TOTAL_ROWS
+------------ ----------
+PRODUCT              50
+WAREHOUSE             5
+INVENTORY           200
+CLIENT               10
+ORDERS               20
+VEHICLE              25
+DRIVER               25
+SHIPMENT             20
+
+8 rows selected.
+
+
+>> Project complete. All tables, data, triggers, views, queries and access control ready.
+
+
+USERNAME
+------------------------------------------------------------------------------------------------------------------------
+SYS
+SYSTEM
+XS$NULL
+LBACSYS
+OUTLN
+DBSNMP
+APPQOSSYS
+DBSFWUSER
+GGSYS
+ANONYMOUS
+CTXSYS
+DVSYS
+DVF
+AUDSYS
+GSMADMIN_INTERNAL
+OLAPSYS
+MDSYS
+XDB
+WMSYS
+GSMCATUSER
+MDDATA
+SYSBACKUP
+REMOTE_SCHEDULER_AGENT
+PDBADMIN
+GSMUSER
+SYSRAC
+OJVMSYS
+SI_INFORMTN_SCHEMA
+DIP
+ORDPLUGINS
+SYSKM
+DGPDB_INT
+ORDDATA
+SCM_EMPLOYEE
+ORACLE_OCM
+SYS$UMF
+SCM_ADMIN
+SCM_TRACKER
+SYSDG
+ORDSYS
+
+40 rows selected.
+
